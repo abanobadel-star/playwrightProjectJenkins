@@ -10,11 +10,8 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    def nodeHome = tool name: 'NodeJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-                    env.PATH = "${nodeHome}/bin:${env.PATH}"
-                    sh 'npm install'
-                }
+                sh 'node -v'  // Verify Node.js version
+                sh 'npm install'
             }
         }
 
