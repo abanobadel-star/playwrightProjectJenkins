@@ -59,4 +59,18 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            stage('Open Report') {
+                steps {
+                    script {
+                        def reportPath = "file:///C:/ProgramData/Jenkins/.jenkins/jobs/Playwright_Pipeline/builds/${env.BUILD_NUMBER}/htmlreports/Playwright_20Test_20Report/index.html"
+                        echo "Opening report: ${reportPath}"
+                        bat "start ${reportPath}"
+                    }
+                }
+            }
+        }
+    }
 }
