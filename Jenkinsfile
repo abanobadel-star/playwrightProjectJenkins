@@ -60,13 +60,14 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            script {
-                def reportPath = "file:///C:/ProgramData/Jenkins/.jenkins/jobs/Playwright_Pipeline/builds/${env.BUILD_NUMBER}/htmlreports/Playwright_20Test_20Report/index.html"
-                echo "Opening report: ${reportPath}"
-                bat "start ${reportPath}"
-            }
+post {
+    always {
+        script {
+            def reportPath = "file:///C:/ProgramData/Jenkins/.jenkins/jobs/Playwright_Pipeline/builds/${env.BUILD_NUMBER}/htmlreports/Playwright_20Test_20Report/index.html"
+            echo "Opening report: ${reportPath}"
+            bat "start \"\" \"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" ${reportPath}"
         }
     }
+}
+
 }
