@@ -12,11 +12,23 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'node -v'  // Verify Node.js version
+                        sh 'node -v'
                         sh 'npm install'
                     } else {
-                        bat 'node -v'  // Verify Node.js version on Windows
+                        bat 'node -v'
                         bat 'npm install'
+                    }
+                }
+            }
+        }
+
+        stage('Install Playwright Browsers') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'npx playwright install'
+                    } else {
+                        bat 'npx playwright install'
                     }
                 }
             }
@@ -26,9 +38,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'npx playwright test'
+                        sh 'npx playwright test --project=chromium'
                     } else {
-                        bat 'npx playwright test'
+                        bat 'npx playwright test --project=chromium'
                     }
                 }
             }
