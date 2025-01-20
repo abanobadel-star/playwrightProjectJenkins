@@ -10,14 +10,27 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'node -v'  // Verify Node.js version
-                sh 'npm install'
+                script {
+                    if (isUnix()) {
+                        sh 'node -v'  // Verify Node.js version
+                        sh 'npm install'
+                    } else {
+                        bat 'node -v'  // Verify Node.js version on Windows
+                        bat 'npm install'
+                    }
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'npx playwright test'
+                script {
+                    if (isUnix()) {
+                        sh 'npx playwright test'
+                    } else {
+                        bat 'npx playwright test'
+                    }
+                }
             }
         }
 
