@@ -1,10 +1,14 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(name: 'BRANCH', choices: ['main', 'develop', 'feature-branch'], description: 'Select the branch to run the pipeline')
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/abanobadel-star/playwrightProjectJenkins.git'
+                git branch: "${BRANCH}", url: 'https://github.com/abanobadel-star/playwrightProjectJenkins.git'
             }
         }
 
@@ -59,5 +63,5 @@ pipeline {
             }
         }
     }
-
 }
+
